@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
 
 	        for ($i=0; $i < rand(1,10); $i++) {
             $post = new Post();
+            $post->title = $faker->sentence($nbWords = 4, $variableNbWords = true);;
+			$post->img = $faker->imageUrl($width = 1000, $height = 400);
             $post->content = $faker->realText($maxNbChars = 1000, $indexSize = 2);
             $post->user_id = $user->id;
             $post->save();
@@ -42,6 +44,12 @@ class DatabaseSeeder extends Seeder
             	// $comment->likes()->attach($user);
             	// $user->comment_likes()->attach($comment);
             }
+
+            $comment = new Comment();
+            $comment->name = $faker->name;
+            $comment->email = $faker->unique()->email;
+            $comment->title = $faker->sentence($nbWords = 4, $variableNbWords = true);;
+            $comment->message = $faker->realText($maxNbChars = 600, $indexSize = 2);
         }
     }
 }

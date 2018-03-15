@@ -54,6 +54,20 @@ Route::get('/about', function () {
     return view('about');
 });
 
+
+
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/contact',  'ContactController@create');
+
+Route::post('/contact',  'ContactController@store');
+
+Route::get('/post/new',  'PostController@create');
+
+Route::post('/post/new',  'PostController@store');
+
+
