@@ -37,4 +37,6 @@ Route::post('/post/new',  'PostController@store');
 
 Route::post('/comment/new',  'CommentController@store');
 
+Route::post('/post/{id}/like', 'PostController@like');
+
 

@@ -7,6 +7,8 @@
 			margin-top: 20px;
 			line-height: 50px;
 		}
+		
+
 
 	</style>
 	<div class="post container">
@@ -14,6 +16,16 @@
 		
 		<h1 style="font-size:300%">{{ $post->title }}</h1>
 		<p> Author: {{$post->name}} </p>
+		<p style="margin: -10px 0px;"> {{ $likes }} likes. </p>
+    	@if (Auth::check())
+			<form style="margin-left:-11px" method="post" action="/post/{{$post->id}}/like">
+				{{ csrf_field() }}
+				<button class="btn btn-link" role="link" type="submit" >
+					<?php echo !$liked ? 'Like' : 'Unlike'?>
+						
+				</button>
+			</form> 
+    	@endif
 		<hr />
 		<img src='{{ $post->img }}' style="max-width:100%;" />
 
@@ -49,18 +61,23 @@
 
 	<div class="container">
 		<h3> Comments </h3>
-		<form method="post" action="/comment/new">
-			{{csrf_field()}}
-			<input type="hidden" name="post_id" value="{{ $post->id }}">
-	        @include('forms.textarea', [
-	            'label' => '',
-	            'name' => 'comment',
-	            'rows' => '5'
-	        ])
 
-	        <input type="submit" name="" value="Submit">
-		</form>
+        @if (Auth::check())
+			<form method="post" action="/comment/new">
+				{{csrf_field()}}
+				<input type="hidden" name="post_id" value="{{ $post->id }}">
+		        @include('forms.textarea', [
+		            'label' => '',
+		            'name' => 'comment',
+		            'rows' => '5'
+		        ])
 
+		        <input type="submit" name="" value="Submit">
+			</form>
+		@else
+			<br>
+			<p><a href="/login">Sign in</a> to comment.</p>
+		@endif
 
 		<script>
 			// function submitComment(form) {

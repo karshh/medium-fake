@@ -88,11 +88,42 @@ class PostController extends Controller
                     ->orderBy('updated_at', 'DESC')
                     ->get();
 
+        $likes = $post->likes()->count();
+
+
+        $liked = $post->isLikedByCurrentUser();
+
         return view('post', [
             'post' => $post,
-            'comments' => $comments
+            'comments' => $comments,
+            'likes' => $likes,
+            'liked' => $liked
         ]);
     }
+
+    public function like($id) {
+
+        $request = request();
+
+        if (!\Auth::check()) {
+            return redirect('/login');
+        }
+
+        $user = $request->user();
+        $post = Post::find($id);
+
+        if ($post->isLikedByCurrentUser()) {
+            $post->likes()->detach($user);
+        } else {
+            $post->likes()->attach($user);
+        }
+
+        return back()->with('message', 'You successfully liked a tweet.');
+
+
+    }
+
+
 
 
 }
