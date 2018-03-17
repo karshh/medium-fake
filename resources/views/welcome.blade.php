@@ -19,60 +19,76 @@
 	}
 
 ?>
-	<div class="row">
-		<div class="col-5">
-			<div style="margin-left: 10%;">
-				<hr align="left" color="black" style="width: 80px; padding: 1px; margin-top:5px; margin-bottom:0px">
-	    		<p style="color:black;">FEATURED</p>
-				<?php $blogPanel = $posts[0]; ?>
+
+<style>
+	a:hover {
+		text-decoration: none;
+	}	
+
+</style>
+
+<div class="row">
+	<div class="col-5">
+		<div style="margin-left: 10%;">
+			<hr align="left" color="black" style="width: 80px; padding: 1px; margin-top:5px; margin-bottom:0px">
+    		<p style="color:black;">FEATURED</p>
+			<?php $blogPanel = $posts[0]; ?>
+			<a href="/post/{{$blogPanel->id}}">
 				<h1><strong> {{ $blogPanel->title }} </strong></h1>
 				<p> {{ getShortContent($blogPanel->content) }} </p>
 				<p style="font-size:16px; margin-top: -15px"> 
 					 {{ $blogPanel->name }} <?php echo printStar() . " " . printReadTime() ?> 
 				</p>
-			</div>
-			<img src=' {{ $blogPanel->img }} ' / style="max-width:100%; margin-top:10px;">
+			</a>
 		</div>
+		<img src=' {{ $blogPanel->img }} ' / style="max-width:100%; margin-top:10px;">
+	</div>
 
-		<div class="col-7">
-			<div class="row">
-				@for ($x=1; $x < 4; $x++)
-					<?php $blogPanel = $posts[$x] ?>
-					<div class="col-4">
+	<div class="col-7">
+		<div class="row">
+			@for ($x=1; $x < 4; $x++)
+				<?php $blogPanel = $posts[$x] ?>
+				<div class="col-4">
+					<a href="/post/{{$blogPanel->id}}">
 						<img src=' {{ $blogPanel->img }} ' style="max-width:100%;">
 						<h1 style="font-size:22px;"><strong> {{ $blogPanel->title }} </strong></h1>
 						<p style="font-size:18px;"> {{ getShortContent($blogPanel->content) }} </p>
 						<p style="font-size:16px; margin-top: -15px"> {{ $blogPanel->name }} <?php printStar() ?> </p>
-					</div>
+					</a>
+				</div>
 
-				@endfor
-			</div>
-			<div class="row">
-				<div class="col-4">
-					<hr color="black" style="padding: 1px">
-					@for ($x=4; $x < 7; $x++)
-						<?php $blogPanel = $posts[$x] ?>
-						<div>
+			@endfor
+		</div>
+		<div class="row">
+			<div class="col-4">
+				<hr color="black" style="padding: 1px">
+				@for ($x=4; $x < 7; $x++)
+					<?php $blogPanel = $posts[$x] ?>
+					<div>
+						<a href="/post/{{$blogPanel->id}}">
 							<h1 style="font-size:21px;"><strong> {{ $blogPanel->title }} </strong></h1>
 							<p style="font-size:16px; margin-top: -5px; margin-bottom: -10px;"> {{ $blogPanel->name }} <?php printStar() ?> </p>
-						</div>
-						<hr width="50%" align="left">
-						
-					@endfor
-				</div>
-				<div class="col-8">
+						</a>
+					</div>
+					<hr width="50%" align="left">
+					
+				@endfor
+			</div>
+			<div class="col-8">
 
-					<?php $blogPanel = $posts[7] ?>
+				<?php $blogPanel = $posts[7] ?>
+				<a href="/post/{{$blogPanel->id}}">
 					<img src='{{ $blogPanel->img }}' style="width:100%; margin-top:15px;">
 					<h1><strong> {{ $blogPanel->title }}</strong></h1>
 					<p> {{ getShortContent($blogPanel->content) }} <strong> &middot; </strong> {!! printReadTime() !!} </p><br>
-				</div>
-
+				</a>
 			</div>
 
 		</div>
 
 	</div>
+
+</div>
 
 	<style>
 		#appealContent {

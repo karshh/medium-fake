@@ -1,32 +1,4 @@
 <?php
- 
- use Faker\Factory as Faker;
-
-class BlogPanel {
-	public $title;
-	public $date;
-	public $author;
-	public $img;
-	public $featureimg;
-	public $thinimg;
-	public $data;
-	public $readNum;
-
-	function __Construct() {
-
-		$faker = Faker::create();
-		$this->title = $faker->sentence($nbWords = 3, $variableNbWords = true);
-		$this->author = $faker->name;
-		$this->date = $faker->date($format = 'Y-m-d', $max = 'now');
-		$this->featureimg = $faker->imageUrl($width = 1000, $height = 600);
-		$this->img = $faker->imageUrl($width = 1000, $height = 400);
-		$this->thinimg = $faker->imageUrl($width = 1100, $height = 300);
-		$this->data = $faker->sentence($nbWords = 6, $variableNbWords = true);
-		$this->readNum = ($faker->randomDigit % 20) + 1;
-	}
-}
-
-
 
 
 /*
@@ -59,6 +31,7 @@ Route::get('/contact',  'ContactController@create');
 Route::post('/contact',  'ContactController@store');
 
 Route::get('/post/new',  'PostController@create');
+Route::get('/post/{id}',  'PostController@getSpecificPost');
 
 Route::post('/post/new',  'PostController@store');
 
