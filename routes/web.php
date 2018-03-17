@@ -24,15 +24,10 @@ class BlogPanel {
 		$this->data = $faker->sentence($nbWords = 6, $variableNbWords = true);
 		$this->readNum = ($faker->randomDigit % 20) + 1;
 	}
-
-	public function printStar() {
-		return '<span><strong> &middot; </strong> &#9733; </span>';
-	}
-
-	public function printReadTime() {
-		return $this->readNum . " min read";
-	}
 }
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,10 +40,6 @@ class BlogPanel {
 |
 */
 
-Route::get('/', function () {
-
-    return view('welcome');
-});
 
 Route::get('/about', function () {
     return view('about');
@@ -58,6 +49,7 @@ Route::get('/about', function () {
 
 Auth::routes();
 
+Route::get('/', 'PostController@getRecentPosts');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

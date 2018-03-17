@@ -9,6 +9,7 @@ use App\Comment;
 class Post extends Model
 {
     public $table = 'posts';
+    
 	public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }

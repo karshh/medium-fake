@@ -15,41 +15,45 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        	$faker = Factory::create();
+        for ($k = 0; $k < 5; $k++) {
 
-	        $user = new User();
-	        $user->name = $faker->name;
-	        $user->email = $faker->unique()->email;
-	        $user->password = 'hahaha';
-	        $user->save();
+            $faker = Factory::create();
 
-	        for ($i=0; $i < rand(1,10); $i++) {
-            $post = new Post();
-            $post->title = $faker->sentence($nbWords = 4, $variableNbWords = true);;
-			$post->img = $faker->imageUrl($width = 1000, $height = 400);
-            $post->content = $faker->realText($maxNbChars = 1000, $indexSize = 2);
-            $post->user_id = $user->id;
-            $post->save();
+            $user = new User();
+            $user->name = $faker->name;
+            $user->email = $faker->unique()->email;
+            $user->password = 'hahaha';
+            $user->save();
 
-            // $post->likes()->attach($user);
-            // $user->post_likes()->attach($post);
+            for ($i=0; $i < rand(10,20); $i++) {
+                $post = new Post();
+                $post->title = $faker->sentence($nbWords = 4, $variableNbWords = true);;
+                $post->img = $faker->imageUrl($width = 1000, $height = 400);
+                $post->content = $faker->realText($maxNbChars = 1000, $indexSize = 2);
+                $post->user_id = $user->id;
+                $post->save();
 
-            for ($j=0; $j<rand(1,10) ; $j++) {
+                // $post->likes()->attach($user);
+                // $user->post_likes()->attach($post);
+
+                for ($j=0; $j<rand(10,20) ; $j++) {
+                    $comment = new Comment();
+                    $comment->user_id = $user->id;
+                    $comment->post_id = $post->id;
+                    $comment->content = $faker->realText($maxNbChars = 200, $indexSize = 2);
+                    $comment->save();
+
+                    // $comment->likes()->attach($user);
+                    // $user->comment_likes()->attach($comment);
+                }
+
                 $comment = new Comment();
-                $comment->user_id = $user->id;
-                $comment->post_id = $post->id;
-            	$comment->content = $faker->realText($maxNbChars = 200, $indexSize = 2);
-                $comment->save();
-
-            	// $comment->likes()->attach($user);
-            	// $user->comment_likes()->attach($comment);
+                $comment->name = $faker->name;
+                $comment->email = $faker->unique()->email;
+                $comment->title = $faker->sentence($nbWords = 4, $variableNbWords = true);;
+                $comment->message = $faker->realText($maxNbChars = 600, $indexSize = 2);
             }
 
-            $comment = new Comment();
-            $comment->name = $faker->name;
-            $comment->email = $faker->unique()->email;
-            $comment->title = $faker->sentence($nbWords = 4, $variableNbWords = true);;
-            $comment->message = $faker->realText($maxNbChars = 600, $indexSize = 2);
         }
     }
 }

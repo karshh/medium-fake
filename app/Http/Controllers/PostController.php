@@ -49,5 +49,33 @@ class PostController extends Controller
         return back()->with('message', 'You successfully made a post.');
     }
 
+    public function getRecentPosts() {
+
+        $request = request();
+
+        $posts = Post::orderBy('created_at', 'DESC')
+                ->take(10)
+                ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                ->select('posts.*', 'users.name')
+                ->get();
+
+        //dd($posts[0]->name);
+        // foreach($posts as $post) {
+        //     $username = $posts[1]->user()->first()->name;
+        //     $users[(string) $post->user_id] = $username;
+        // }
+
+
+        if (count($posts) > 8) {
+            return view('welcome', [
+                'posts' => $posts
+            ]);   
+        } else {
+            return view('layout');
+        }
+
+
+    }
+
 
 }
