@@ -35,4 +35,6 @@ Route::get('/post/{id}',  'PostController@getSpecificPost');
 
 Route::post('/post/new',  'PostController@store');
 
+Route::post('/comment/new',  'CommentController@store');
+
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Comment;
 
 class PostController extends Controller
 {
@@ -81,8 +82,15 @@ class PostController extends Controller
                 ->select('posts.*', 'users.name')
                 ->first();
 
+        $comments = Comment::where('comments.post_id', $post->id)
+                    ->leftJoin('users', 'users.id', '=', 'comments.user_id')
+                    ->select('comments.*', 'users.name')
+                    ->orderBy('updated_at', 'DESC')
+                    ->get();
+
         return view('post', [
-            'post' => $post
+            'post' => $post,
+            'comments' => $comments
         ]);
     }
 

@@ -3,6 +3,7 @@
         {{ $label }}
     </label>
     <textarea
+        id="{{ $name }}"
         name="{{ $name }}"
         placeholder="{{ $label }}"
         value="{{ old($name) }}"
