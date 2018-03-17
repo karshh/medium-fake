@@ -17,21 +17,6 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-
-    public function likes()
-    {
-        return $this->belongsToMany(User::class);
-    }
-
-    public function isLikedByCurrentUser()
-    {
-        $currentUser = request()->user();
-
-        return $this
-            ->likes
-            ->contains($currentUser);
-    }
 }
 
 

@@ -20,7 +20,7 @@ class Comments extends Migration
             $table->integer('post_id')->unsigned();
             $table->foreign('post_id')->references('id')->on('posts');
 
-            $table->string('content', 300);
+            $table->text('content');
             $table->timestamps();
         });
     }

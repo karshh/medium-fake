@@ -39,4 +39,3 @@ Route::post('/comment/new',  'CommentController@store');
 
 Route::post('/post/{id}/like', 'PostController@like');
 
-

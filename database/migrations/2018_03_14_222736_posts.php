@@ -19,7 +19,7 @@ class Posts extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('title',1000);
-            $table->string('content');
+            $table->text('content');
             $table->string('img',1000);
             $table->timestamps();
         });

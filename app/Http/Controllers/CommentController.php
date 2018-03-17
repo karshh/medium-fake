@@ -28,4 +28,5 @@ class CommentController extends Controller
         return back()->with('message', 'success.');
 
 	}
+
 }
