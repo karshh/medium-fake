@@ -16,9 +16,9 @@
 			color:black;
 		}
 		a:hover {
+			color: black;
 			text-decoration: line-under;
-			text-decoration-color: none;
-		}	
+		}
 
 		.profileRow {
 			border-width: 10px;
