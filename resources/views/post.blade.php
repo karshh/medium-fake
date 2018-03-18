@@ -15,13 +15,13 @@
 		
 		
 		<h1 style="font-size:300%">{{ $post->title }}</h1>
-		<p> Author: {{$post->name}} </p>
-		<p style="margin: -10px 0px;"> {{ $likes }} likes. </p>
+		<p> Author: {{$post->user->name}} </p>
+		<p style="margin: -10px 0px;"> {{ $post->likes->count() }} likes. </p>
     	@if (Auth::check())
 			<form style="margin-left:-11px" method="post" action="/post/{{$post->id}}/like">
 				{{ csrf_field() }}
 				<button class="btn btn-link" role="link" type="submit" >
-					<?php echo !$liked ? 'Like' : 'Unlike'?>
+					<?php echo !$post->likes->contains($post->user) ? 'Like' : 'Unlike'?>
 						
 				</button>
 			</form> 
@@ -92,9 +92,9 @@
 
 		</script>
 		<div class="commentsContainer">
-			@foreach($comments as $comment)
+			@foreach($post->comments as $comment)
 				<div class="commentRow">
-					<p> {{ $comment->name }} </p>
+					<a href="/profile/{{$comment->user_id}}"><p> {{ $comment->user->name }} </p></a>
 					<p> {{ $comment->updated_at }} </p>
 					<h6 style="font-size:110%"> {{ $comment->content }} </h6>
 				</div>

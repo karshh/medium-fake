@@ -1,6 +1,21 @@
 <?php
 
 
+
+	function printStar() {
+		return '<span><strong> &middot; </strong> &#9733; </span>';
+	}
+
+	function printReadTime() {
+		return rand(1,10) . " min read";
+	}
+
+	function getShortContent($content) {
+		return substr($content, 0, min(45, strlen($content))) . (strlen($content) < 45 ? "" : "...");
+	}
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,3 +54,5 @@ Route::post('/comment/new',  'CommentController@store');
 
 Route::post('/post/{id}/like', 'PostController@like');
 
+
+Route::get('/profile/{id}', 'ProfileController@getUser');

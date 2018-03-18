@@ -3,29 +3,11 @@
 
 @section('content')
 
-
-<?php 
-
-	function printStar() {
-		return '<span><strong> &middot; </strong> &#9733; </span>';
-	}
-
-	function printReadTime() {
-		return rand(1,10) . " min read";
-	}
-
-	function getShortContent($content) {
-		return substr($content, 0, min(45, strlen($content))) . "...";
-	}
-
-?>
-
-<style>
-	a:hover {
-		text-decoration: none;
-	}	
-
-</style>
+@if ($posts->count() == 0)
+	<div class="container" align="center">
+		<p style="font-size:20px"> No posts made as of yet. Click <a href="/post/new">here</a> to make one!</p>
+	</div>
+@else
 
 <div class="row">
 	<div class="col-5">
@@ -36,10 +18,12 @@
 			<a href="/post/{{$blogPanel->id}}">
 				<h1><strong> {{ $blogPanel->title }} </strong></h1>
 				<p> {{ getShortContent($blogPanel->content) }} </p>
-				<p style="font-size:16px; margin-top: -15px"> 
-					 {{ $blogPanel->name }} <?php echo printStar() . " " . printReadTime() ?> 
-				</p>
 			</a>
+			<a href="/profile/{{$blogPanel->user_id}}">
+				<p style="font-size:16px; margin-top: -15px"> 
+					  {{ $blogPanel->user->name }} <?php echo printStar() . " " . printReadTime() ?> 
+				</p>
+			</a> 
 		</div>
 		<img src=' {{ $blogPanel->img }} ' / style="max-width:100%; margin-top:10px;">
 	</div>
@@ -47,14 +31,17 @@
 	<div class="col-7">
 		<div class="row">
 			@for ($x=1; $x < 4; $x++)
+				<?php if ($posts->count() <= $x) break; ?>
 				<?php $blogPanel = $posts[$x] ?>
 				<div class="col-4">
 					<a href="/post/{{$blogPanel->id}}">
 						<img src=' {{ $blogPanel->img }} ' style="max-width:100%;">
 						<h1 style="font-size:22px;"><strong> {{ $blogPanel->title }} </strong></h1>
 						<p style="font-size:18px;"> {{ getShortContent($blogPanel->content) }} </p>
-						<p style="font-size:16px; margin-top: -15px"> {{ $blogPanel->name }} <?php printStar() ?> </p>
 					</a>
+					<a href="/profile/{{$blogPanel->user_id}}">
+						<p style="font-size:16px; margin-top: -15px"> {{ $blogPanel->user->name }} <?php printStar() ?> </p>
+					</a> 
 				</div>
 
 			@endfor
@@ -63,25 +50,29 @@
 			<div class="col-4">
 				<hr color="black" style="padding: 1px">
 				@for ($x=4; $x < 7; $x++)
+					<?php if ($posts->count() <= $x) break; ?>
 					<?php $blogPanel = $posts[$x] ?>
 					<div>
 						<a href="/post/{{$blogPanel->id}}">
 							<h1 style="font-size:21px;"><strong> {{ $blogPanel->title }} </strong></h1>
-							<p style="font-size:16px; margin-top: -5px; margin-bottom: -10px;"> {{ $blogPanel->name }} <?php printStar() ?> </p>
 						</a>
+						<a href="/profile/{{$blogPanel->user_id}}">
+							<p style="font-size:16px; margin-top: -5px; margin-bottom: -10px;"> {{ $blogPanel->user->name }} <?php printStar() ?> </p>
+						</a> 
 					</div>
 					<hr width="50%" align="left">
 					
 				@endfor
 			</div>
 			<div class="col-8">
-
+				@if ($posts->count() >= 7)
 				<?php $blogPanel = $posts[7] ?>
 				<a href="/post/{{$blogPanel->id}}">
 					<img src='{{ $blogPanel->img }}' style="width:100%; margin-top:15px;">
 					<h1><strong> {{ $blogPanel->title }}</strong></h1>
 					<p> {{ getShortContent($blogPanel->content) }} <strong> &middot; </strong> {!! printReadTime() !!} </p><br>
 				</a>
+				@endif
 			</div>
 
 		</div>
@@ -141,6 +132,10 @@
 	 			</div>
 	 		</div>
 	    </div>
+
+
+
+@endif
 
 
 @endsection

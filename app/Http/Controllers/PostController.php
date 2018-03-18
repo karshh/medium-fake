@@ -32,7 +32,7 @@ class PostController extends Controller
         $result = $request->validate([
             'title' => 'required|max:255',
             'img' => 'required',
-            'content' => 'required'
+            'content' => 'required|max:15000'
         ], [
         ]);
 
@@ -56,18 +56,11 @@ class PostController extends Controller
 
         $posts = Post::orderBy('created_at', 'DESC')
                 ->take(10)
-                ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-                ->select('posts.*', 'users.name')
                 ->get();
 
-
-        if (count($posts) > 8) {
-            return view('welcome', [
-                'posts' => $posts
-            ]);   
-        } else {
-            return view('layout');
-        }
+        return view('welcome', [
+            'posts' => $posts
+        ]);
 
 
     }
@@ -77,26 +70,15 @@ class PostController extends Controller
 
         $request = request();
 
-        $post = Post::where('posts.id', $id)
-                ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-                ->select('posts.*', 'users.name')
-                ->first();
+        $post = Post::where('posts.id', $id)->first();
 
-        $comments = Comment::where('comments.post_id', $post->id)
-                    ->leftJoin('users', 'users.id', '=', 'comments.user_id')
-                    ->select('comments.*', 'users.name')
-                    ->orderBy('updated_at', 'DESC')
-                    ->get();
-
-        $likes = $post->likes()->count();
+        // $likes = $post->likes()->count();
 
 
         $liked = $post->isLikedByCurrentUser();
 
         return view('post', [
             'post' => $post,
-            'comments' => $comments,
-            'likes' => $likes,
             'liked' => $liked
         ]);
     }

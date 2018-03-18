@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -15,6 +17,10 @@
 
         <style>
             
+            * {
+                word-wrap:break-word;
+            }
+
             #signIn {
                 margin-left: 15px;
                 margin-right: 15px;
@@ -99,6 +105,9 @@
                                 <a class="btn nav-options right-options" href="/register">Get started</a>
                             @else
                                 <a style="margin-top:7px; margin-left: 5px" class="nav-options right-options" id="createPost" href="/post/new">Create Post</a>
+                                <a style="margin-top:7px; margin-left: 15px" 
+                                class="nav-options right-options" id="createPost" 
+                                href="/profile/{{ Auth::user()->id }}">Profile</a>
                                 <a  style="margin-left: 15px"  class="btn nav-options right-options" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         Logout
