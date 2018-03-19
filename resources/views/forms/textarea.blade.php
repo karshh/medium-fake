@@ -9,7 +9,7 @@
         value="{{ old($name) }}"
         class="form-control {{ $errors->has($name) ? 'is-invalid' : '' }}"
         rows="{{ $rows }}"
-         ></textarea>
+         required></textarea>
     @if($errors->has($name))
         <span class="invalid-feedback">
             {{ $errors->first($name) }}

@@ -8,7 +8,7 @@
         placeholder="{{ $label }}"
         value="{{ old($name) }}"
         class="form-control {{ $errors->has($name) ? 'is-invalid' : '' }}"
-        />
+        required>
     @if($errors->has($name))
         <span class="invalid-feedback">
             {{ $errors->first($name) }}
