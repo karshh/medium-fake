@@ -75,8 +75,10 @@ class PostController extends Controller
         // $likes = $post->likes()->count();
 
 
-        $liked = $post->isLikedByCurrentUser();
-
+        $liked = null;
+        if ($post) {
+            $liked = $post->isLikedByCurrentUser();
+        }
         return view('post', [
             'post' => $post,
             'liked' => $liked

@@ -1,7 +1,13 @@
 @extends('layout')
 
 @section('content')
-	
+
+@if (!$post)
+<div class="container" align="center">
+		<p style="font-size:20px"> This post does not exist. </p>
+</div>
+@else
+
 	<style>
 		.post > h6 {
 			margin-top: 20px;
@@ -103,5 +109,5 @@
 
 	</div>
 
-
+@endif
 @endsection

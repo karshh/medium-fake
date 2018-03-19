@@ -2,6 +2,11 @@
 
 @section('content')
 
+@if (!$user)
+<div class="container" align="center">
+		<p style="font-size:20px"> This profile does not exist. </p>
+</div>
+@else
 	<div class="post container">
 	
 		<h1 style="font-size:200%">{{ $user->name }}</h1>
@@ -87,5 +92,5 @@
 
 	</div>
 
-
+@endif
 @endsection
