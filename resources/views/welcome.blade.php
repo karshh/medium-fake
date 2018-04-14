@@ -10,7 +10,7 @@
 @else
 
 <div class="row">
-	<div class="col-5">
+	<div class="col-lg-5 col-md-12 col-sm-12">
 		<div style="margin-left: 10%;">
 			<hr align="left" color="black" style="width: 80px; padding: 1px; margin-top:5px; margin-bottom:0px">
     		<p style="color:black;">FEATURED</p>
@@ -28,7 +28,7 @@
 		<img src=' {{ $blogPanel->img }} ' / style="max-width:100%; margin-top:10px;">
 	</div>
 
-	<div class="col-7">
+	<div class="col-lg-7 col-md-12 col-sm-12">
 		<div class="row">
 			@for ($x=1; $x < 4; $x++)
 				<?php if ($posts->count() <= $x) break; ?>
@@ -86,8 +86,7 @@
 			background-color: #E8F3EC; 
 			height: 350px;
 			border-radius: 2px;
-			width: 1000px;
-			margin-left: 10%;
+			min-width: 1000px;
 			margin-top: 50px;
 		}
 
@@ -112,7 +111,7 @@
 		}
 	</style>
 		
-	    <div id="appealContent">
+	    <div class="justify-content-center" id="appealContent">
 	 		<div class="row">
 	 			<div id="appealText" class="col-5">
 	 				
@@ -123,10 +122,6 @@
 					  <button type="button" class="btn btn-dark">Get Started</button>
 					  <button type="button" class="btn btn-outline-dark">Learn More</button>
 					</nav>
-	 			</div>
-
-	 			<div id="appealImg" class="col-4">
-	 				<img src="https://web.archive.org/web/20180302172600im_/https://cdn-images-1.medium.com/max/2000/1*TckFXfkU_bg0aADPYR_t7Q.png" />
 	 			</div>
 	 				
 	 			</div>
